@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Z-EMB/Chat/issues"
   },
-  "homepage": "https://github.com/Z-EMB/Chat#readme"
+  "homepage": "https://github.com/Z-EMB/Chat#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
