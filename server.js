@@ -7,9 +7,10 @@ var app = express();
 
 settings(app,"favicon");
 
+app.use(express.static(__dirname + '/public'));
 
 app.get('/*', function (req, res) {
-    res.send('Hello World!');
+    res.sendFile(__dirname+'/public/views/index.html');
 });
 
 app.listen(3000);
