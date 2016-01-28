@@ -8,8 +8,9 @@ function loadDefaultFavicon(app){
 
 function loadSettings(app,settingType){
     "use strict";
-    if(settingType==="favicon"){
-        loadDefaultFavicon(app);
+    switch(settingType) {
+        case "favicon":loadDefaultFavicon(app);
+            break;
     }
 }
 
