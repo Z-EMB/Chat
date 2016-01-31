@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/Z-EMB/Chat#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
     "jshint": "^2.9.1"

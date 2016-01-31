@@ -4,15 +4,14 @@ var express = require('express');
 var settings = require('./server/config/ExternalSettings.js');
 
 var app = express();
+var PORT = 8080;
 
 settings(app,"favicon");
 
-app.use(express.static(__dirname + '/public'));
+// routing
+require('./server/controllers/main.js')(app, express);
 
-app.get('/*', function (req, res) {
-    res.sendFile(__dirname+'/public/views/index.html');
+var server = app.listen(PORT, '0.0.0.0', function() {
+    console.log('Chat listening on port ' + PORT);
 });
-
-app.listen(3000);
-console.log('Listening on port 3000');
 
