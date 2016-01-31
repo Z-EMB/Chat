@@ -2,7 +2,7 @@ module.exports = function(grunt) {
     // task config
     grunt.initConfig({
         jshint: {
-            backend: ['server/**/*.js'],
+            backend: ['./*.js', 'server/**/*.js'],
             frontend: ['public/js/**/*.js']
         }
     });
