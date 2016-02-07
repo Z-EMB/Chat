@@ -39,11 +39,11 @@ module.exports = function() {
         // keep the log to the most recent 100 messages
         if (this.log.length > 100) {
             this.log.shift();
-        };
+        }
 
         // return the updated log
         return this.log;
     };
 
     return Chat;
-};
+}();
