@@ -4,10 +4,9 @@ module.exports = function(app, express) {
     var counter=0;
     // chat API routes go here, this one is just an example
     app.post('/message', function(req, res) {
-        // endpoint to send a meesage to the chat
-        console.log("message number "+counter++);
-        res.contentType('json');
-        res.send({jsonValue:'kappaValue'});
+        console.log(JSON.stringify(req.body)+ '\n\tmessage number '+counter++);
+        console.log();
+        res.send(req.body);
     });
 
     // handle 404
