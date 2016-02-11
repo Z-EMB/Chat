@@ -4,8 +4,8 @@ module.exports = function(app, express) {
     var counter=0;
     // chat API routes go here, this one is just an example
     app.post('/message', function(req, res) {
-        console.log(JSON.stringify(req.body)+ '\n\tmessage number '+counter++);
-        console.log();
+        //log incoming request body, body exists because of body-parser from express
+        console.log('\n\tmessage number '+(counter++)+JSON.stringify(req.body));
         res.send(req.body);
     });
 

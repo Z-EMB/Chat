@@ -4,13 +4,13 @@ $(document).ready(function() {
         return $('.messageTextInput').val();
     }
 
-    function buildJSONRequest(){
+    function buildJSONStringRequest(){
         //will add user here for now default
         return JSON.stringify({requestValue:{user:'default',message:getMessageValue()}});
     }
 
     $('.sendButton').click(function() {
-        var jsonData = buildJSONRequest();
+        var jsonData = buildJSONStringRequest();
         //post ajax here with content from messageTextInput
         $.ajax({
             method: 'POST',
@@ -18,7 +18,7 @@ $(document).ready(function() {
             contentType:'application/json',
             data: jsonData
         }).done(function(res){
-            console.log("post success");
+            console.log('post success,value: ' + JSON.stringify(res));
         });
     });
 
