@@ -16,10 +16,7 @@ function setUpPaths(){
 function loadSettings(settingType,app){
     "use strict";
     switch(settingType) {
-        case "favicon":
-            if(!app){
-                loadDefaultFavicon(app)
-            };
+        case "favicon":if(!app){loadDefaultFavicon(app)};
             break;
         case "paths":setUpPaths();
             break;
