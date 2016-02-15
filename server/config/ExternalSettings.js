@@ -5,10 +5,23 @@ function loadDefaultFavicon(app){
     app.use(favicon(global.root +'/public/resources/favicon.png'));
 }
 
-function loadSettings(app,settingType){
+function setUpPaths(){
+    global.backend = global.root + '/server';
+    global.models = global.backend + '/models';
+    global.controllers = global.backend + '/controllers';
+    global.views = global.backend + '/views';
+    global.config = global.backend + '/config';
+}
+
+function loadSettings(settingType,app){
     "use strict";
     switch(settingType) {
-        case "favicon":loadDefaultFavicon(app);
+        case "favicon":
+            if(!app){
+                loadDefaultFavicon(app)
+            };
+            break;
+        case "paths":setUpPaths();
             break;
     }
 }

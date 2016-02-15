@@ -1,18 +1,14 @@
 global.root = __dirname;
-global.backend = global.root + '/server';
-global.models = global.backend + '/models';
-global.controllers = global.backend + '/controllers';
-global.views = global.backend + '/views';
-global.config = global.backend + '/config';
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var settings = require(global.config + '/ExternalSettings.js');
+var settings = require(global.root + '/server/config/ExternalSettings.js');
 
 var app = express();
 var PORT = 8080;
 
-settings(app,"favicon");
+settings("favicon",app);
+settings("paths");
 
 // part of express
 app.use(bodyParser.json());
