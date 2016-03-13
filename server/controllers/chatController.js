@@ -4,6 +4,7 @@
 
 module.exports = function(io) {
 	var User = require(global.models + '/User.js')();
+	var Room = require(global.models + '/Chatroom.js')();
 
 	var users = {};			// map of users
 	var rooms = {};			// map of rooms
