@@ -1,22 +1,30 @@
 global.root = __dirname;
 
+// import express
 var express = require('express');
-var bodyParser = require('body-parser');
+
+// init app
+var app = express();
+
+// http server and sockets
+var server = require('http').Server(app);
+var io = require('socket.io')(http);
+
+// chat functionality
+require(global.controllers + '/chatController.js')(io);
+
+// import config manager
 var settings = require(global.root + '/server/config/ExternalSettings.js');
 
-var app = express();
 var PORT = 8080;
 
+// config
 settings("favicon",app);
 settings("paths");
 
-// part of express
-app.use(bodyParser.json());
+// routing and middleware
+require(global.controllers + '/mainController.js')(app, express);
 
-// routing
-require(global.controllers + '/RouteRegistration.js')(app, express);
-
-var server = app.listen(PORT, '0.0.0.0', function() {
+server.listen(PORT, function() {
     console.log('Chat listening on port ' + PORT);
 });
-
