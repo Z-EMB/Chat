@@ -15,7 +15,7 @@ module.exports = function(io) {
 		// Client emits 'userConnect' ==> a user connects to our application
 		socket.on('userConnect', function(_username, _roomname) {
 			// if a username is provided, use that.  otherwise they are AnonymousN
-			var username = (_username) ? _username : ('Anonymous' + (anonCounter++))
+			var username = (_username) ? _username : ('Anonymous' + (anonCounter++));
 
 			// check if the username is available.  if not, stop here.  they will have to try again
 			if (users[username]) {
