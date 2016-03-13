@@ -35,17 +35,17 @@ module.exports = function(io) {
 			}
 
 			// add them to the selected room and emit notifications
-			rooms[room].add(users[name]);
-			io.sockets.emit('updateRooms', rooms);
+			rooms[roomname].add(users[username]);
+			//io.sockets.emit('updateRooms', rooms);
 			socket.emit('updateChat', 'SERVER', ('You have connected to room: ' + socket.roomname));
 			socket.broadcast.to(socket.roomname)
-				.emit('updateChat', 'SERVER', ('User ' + name + ' has joined the room.'));
+				.emit('updateChat', 'SERVER', ('User ' + username + ' has joined the room.'));
 		});
 
 		// Client emits 'sendMessage' ==> user sends a message to the chat
 		socket.on('sendMessage', function(message) {
 			io.sockets.in(socket.roomname).emit('updateChat', socket.username, message);
-        console.log(message);
+        	console.log(message);
 		});
 
 		// Client emits 'switchRoom' ==> user switches chatrooms
@@ -72,7 +72,7 @@ module.exports = function(io) {
 
 		// Client disconnects
 		socket.on('disconnect', function() {
-			// remove user from room
+/*			// remove user from room
 			rooms[socket.roomname].remove(users[socket.username]);
 
 			// remove user from the user map
@@ -81,7 +81,7 @@ module.exports = function(io) {
 			// send notifications
 			io.sockets.emit('updateRooms', rooms);
 			socket.broadcast.to(socket.roomname)
-				.emit('updateChat', 'SERVER', (socket.username + ' has disconnected.'));
+				.emit('updateChat', 'SERVER', (socket.username + ' has disconnected.'));*/
 		});
 	});
 };
