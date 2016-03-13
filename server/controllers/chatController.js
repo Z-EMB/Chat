@@ -37,8 +37,9 @@ module.exports = function(io) {
 			// add them to the selected room and emit notifications
 			rooms[room].add(users[name]);
 			io.sockets.emit('updateRooms', rooms);
-			socket.emit('updateChat', 'SERVER', ('You have connected to room: ' + socket.room));
-			socket.broadcast.to(socket.room).emit('updateChat', ('User ' + name + ' has joined the room.'));
+			socket.emit('updateChat', 'SERVER', ('You have connected to room: ' + socket.roomname));
+			socket.broadcast.to(socket.roomname)
+				.emit('updateChat', 'SERVER', ('User ' + name + ' has joined the room.'));
 		});
 
 		// Client emits 'sendMessage' ==> user sends a message to the chat
@@ -62,8 +63,10 @@ module.exports = function(io) {
 			rooms[roomname].add(user);
 			io.sockets.emit('updateRooms', rooms);
 			socket.emit('updateChat', 'SERVER', 'You have connected to room: ' + roomname);
-			socket.broadcast.to(oldRoom.getName()).emit('updateChat', 'SERVER', (socket.username + ' has left the room.'));
-			socket.broadcast.to(roomname).emit('updateChat', 'SERVER', (socket.username + ' has joined the room.'));
+			socket.broadcast.to(oldRoom.getName())
+				.emit('updateChat', 'SERVER', (socket.username + ' has left the room.'));
+			socket.broadcast.to(roomname)
+				.emit('updateChat', 'SERVER', (socket.username + ' has joined the room.'));
 		});
 
 		// Client disconnects
@@ -76,7 +79,8 @@ module.exports = function(io) {
 
 			// send notifications
 			io.sockets.emit('updateRooms', rooms);
-			socket.broadcast.to(socket.roomname).emit('updateChat', 'SERVER', (socket.username + ' has disconnected.'));
+			socket.broadcast.to(socket.roomname)
+				.emit('updateChat', 'SERVER', (socket.username + ' has disconnected.'));
 		});
 	});
 };
