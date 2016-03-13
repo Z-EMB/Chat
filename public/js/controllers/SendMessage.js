@@ -14,7 +14,10 @@ $(document).ready(function() {
     }
 
     $('.sendButton').click(function() {
-        socket.emit('sendMessage', getMessageValue());
+        if(getMessageValue()){
+            socket.emit('sendMessage', getMessageValue());
+            $('.messageTextInput').val("");
+        }
     });
 
 
