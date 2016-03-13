@@ -13,6 +13,14 @@ module.exports = function() {
 	};
 
 	/**
+	 * Get the name of this chatroom
+	 * @return {string} roomname
+	 */
+	 Chatroom.prototype.getName = function() {
+	 	return this.name;
+	 };
+
+	/**
 	 * Get a list of usernames currently in the room.
 	 * @return {Array} users
 	 */
