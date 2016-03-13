@@ -10,17 +10,19 @@ $(document).ready(function() {
     }
 
     $('.sendButton').click(function() {
-        var jsonData = buildJSONStringRequest();
+//        var jsonData = buildJSONStringRequest();
         //post ajax here with content from messageTextInput
-        $.ajax({
-            method: 'POST',
-            url: '/message',
-            contentType:'application/json',
-            data: jsonData
-        }).done(function(res){
-            console.log('post success,value: ' + JSON.stringify(res));
-        });
-    });
+   //     $.ajax({
+     //       method: 'POST',
+       //     url: '/message',
+     //       contentType:'application/json',
+       //     data: jsonData
+     //   }).done(function(res){
+       //     console.log('post success,value: ' + JSON.stringify(res));
+    var socket = io();
+    socket.emit('sendMessage', getMessageValue());
+        }); 
+
 
     $('.messageTextInput').keyup(function(event){
         if(event.keyCode == 13){

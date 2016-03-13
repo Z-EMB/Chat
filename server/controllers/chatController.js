@@ -45,6 +45,7 @@ module.exports = function(io) {
 		// Client emits 'sendMessage' ==> user sends a message to the chat
 		socket.on('sendMessage', function(message) {
 			io.sockets.in(socket.roomname).emit('updateChat', socket.username, message);
+        console.log(message);
 		});
 
 		// Client emits 'switchRoom' ==> user switches chatrooms
