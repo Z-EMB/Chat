@@ -50,9 +50,9 @@ module.exports = function() {
 	 * Test if a specific username is in the room.
 	 * @return {boolean}
 	 */
-/*	Chatroom.prototype.here = function(username) {
+	Chatroom.prototype.here = function(username) {
 		return !!this.users[username];
-	};*/
+	};
 
 	return Chatroom;
 };

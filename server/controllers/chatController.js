@@ -9,6 +9,13 @@ module.exports = function(io) {
 	var users = {};			// map of users
 	var rooms = {};			// map of rooms
 	var anonCounter = 0;	// counter for anon users
+	var serverName = 'EMF_HOST';
+
+	function createRoomUpdateData(rooms) {
+		return Object.keys(rooms).reduce(function(data, roomname) {
+			data[roomname] = rooms[roomname].getUsers();
+		}, {});
+	}
 
 	io.sockets.on('connection', function(socket) {	// Client connection
 		
@@ -36,10 +43,10 @@ module.exports = function(io) {
 
 			// add them to the selected room and emit notifications
 			rooms[roomname].add(users[username]);
-			//io.sockets.emit('updateRooms', rooms);
-			socket.emit('updateChat', 'SERVER', ('You have connected to room: ' + socket.roomname));
+			io.sockets.emit('updateRooms', createRoomUpdateData(rooms));
+			socket.emit('updateChat', serverName, ('You have connected to room: ' + socket.roomname));
 			socket.broadcast.to(socket.roomname)
-				.emit('updateChat', 'SERVER', ('User ' + username + ' has joined the room.'));
+				.emit('updateChat', serverName, ('User ' + username + ' has joined the room.'));
 		});
 
 		// Client emits 'sendMessage' ==> user sends a message to the chat
@@ -62,26 +69,26 @@ module.exports = function(io) {
 
 			// join the new room and send notifications
 			rooms[roomname].add(user);
-			io.sockets.emit('updateRooms', rooms);
-			socket.emit('updateChat', 'SERVER', 'You have connected to room: ' + roomname);
+			io.sockets.emit('updateRooms', createRoomUpdateData(rooms));
+			socket.emit('updateChat', serverName, 'You have connected to room: ' + roomname);
 			socket.broadcast.to(oldRoom.getName())
-				.emit('updateChat', 'SERVER', (socket.username + ' has left the room.'));
+				.emit('updateChat', serverName, (user.who() + ' has left the room.'));
 			socket.broadcast.to(roomname)
-				.emit('updateChat', 'SERVER', (socket.username + ' has joined the room.'));
+				.emit('updateChat', serverName, (user.who() + ' has joined the room.'));
 		});
 
 		// Client disconnects
 		socket.on('disconnect', function() {
-/*			// remove user from room
+			// remove user from room
 			rooms[socket.roomname].remove(users[socket.username]);
 
 			// remove user from the user map
 			delete users[socket.username];
 
 			// send notifications
-			io.sockets.emit('updateRooms', rooms);
+			io.sockets.emit('updateRooms', createRoomUpdateData(rooms));
 			socket.broadcast.to(socket.roomname)
-				.emit('updateChat', 'SERVER', (socket.username + ' has disconnected.'));*/
+				.emit('updateChat', serverName, (socket.username + ' has disconnected.'));
 		});
 	});
 };
