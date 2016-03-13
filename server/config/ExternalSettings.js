@@ -13,16 +13,9 @@ function setUpPaths(){
     global.config = global.backend + '/config';
 }
 
-function loadSettings(settingType,app){
+function loadSettings(app){
     "use strict";
-    switch(settingType) {
-        case "favicon":
-            if(!app) {
-                loadDefaultFavicon(app);
-            }
-            break;
-        case "paths":setUpPaths();
-            break;
-    }
+    loadDefaultFavicon(app);
+    setUpPaths();
 }
 
