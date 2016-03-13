@@ -10,7 +10,7 @@ module.exports = function() {
 	};
 
 	User.prototype.leave = function() {
-		this.socket.leave(roomname);
+		this.socket.leave(this.socket.roomname);
 		this.socket.roomname = '';
 	};
 

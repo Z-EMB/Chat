@@ -15,7 +15,7 @@ module.exports = function() {
 
 	Chatroom.prototype.remove = function(user) {
 		delete this.users[user.who];
-		user.leave(this.name);
+		user.leave();
 	};
 
 	Chatroom.prototype.here = function(username) {
