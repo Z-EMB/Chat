@@ -14,6 +14,7 @@ module.exports = function(io) {
 	function createRoomUpdateData(rooms) {
 		return Object.keys(rooms).reduce(function(data, roomname) {
 			data[roomname] = rooms[roomname].getUsers();
+			return data;
 		}, {});
 	}
 
@@ -52,7 +53,6 @@ module.exports = function(io) {
 		// Client emits 'sendMessage' ==> user sends a message to the chat
 		socket.on('sendMessage', function(message) {
 			io.sockets.in(socket.roomname).emit('updateChat', socket.username, message);
-        	console.log(message);
 		});
 
 		// Client emits 'switchRoom' ==> user switches chatrooms

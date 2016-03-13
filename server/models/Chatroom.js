@@ -33,7 +33,7 @@ module.exports = function() {
 	 * @param {User} user
 	 */
 	Chatroom.prototype.add = function(user) {
-		this.users[user.who] = user;
+		this.users[user.who()] = user;
 		user.join(this.name);
 	};
 
@@ -42,7 +42,7 @@ module.exports = function() {
 	 * @param {User} user
 	 */
 	Chatroom.prototype.remove = function(user) {
-		delete this.users[user.who];
+		delete this.users[user.who()];
 		user.leave();
 	};
 
