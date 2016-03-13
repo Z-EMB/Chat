@@ -1,16 +1,16 @@
 /**
- * Controller for the chat socket
+ * Chat controller.  Manages users, rooms, and socket connections
+ * @param {Service} io: socket.io service
  */
-
 module.exports = function(io) {
-	var User = require(global.models + '/User.js')();
-	var Room = require(global.models + '/Chatroom.js')();
+	var User = require(global.models + '/User.js')();		// User model
+	var Room = require(global.models + '/Chatroom.js')();	// Chatroom model
 
 	var users = {};			// map of users
 	var rooms = {};			// map of rooms
 	var anonCounter = 0;	// counter for anon users
 
-	io.sockets.on('connection', function(socket) {
+	io.sockets.on('connection', function(socket) {	// Client connection
 		
 		// Client emits 'userConnect' ==> a user connects to our application
 		socket.on('userConnect', function(_username, _roomname) {
