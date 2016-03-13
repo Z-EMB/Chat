@@ -6,7 +6,22 @@ $(document).ready(function() {
     socket.on('updateChat', function(username, message) {
         $('.chatWindow').append("<p> username: " + username +
             "Message: " + message + "</p>" );
-        console.log('I have recieved the update event');
+        console.log('I have received the update event');
+    });
+
+    socket.on('updateRooms', function(rooms){
+        var lobbyWindow = $('.lobby');
+        lobbyWindow.empty();
+        Object.keys(rooms).forEach(function(roomname) {
+            lobbyWindow.append("<h4>"+roomname+"</h4>");
+            var userList = document.createElement('ul');
+            var users = rooms[roomname];
+            users.forEach(function(user){
+                $(userList).append("<li>"+user+"</li>");
+            })
+            lobbyWindow.append(userList);
+        });
+        lobbyWindow.scrollTop(lobbyWindow.height());
     });
 
     function getMessageValue(){
