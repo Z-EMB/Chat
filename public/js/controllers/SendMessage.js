@@ -16,9 +16,9 @@ $(document).ready(function() {
             lobbyWindow.append("<h4>"+roomname+"</h4>");
             var userList = document.createElement('ul');
             var users = rooms[roomname];
-            users.forEach(function(user){
+            users.forEach(function(user) {
                 $(userList).append("<li>"+user+"</li>");
-            })
+            });
             lobbyWindow.append(userList);
         });
         lobbyWindow.scrollTop(lobbyWindow.height());
