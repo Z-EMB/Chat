@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var socket = io();
-
+//
     socket.emit('userConnect');
 
     socket.on('updateChat', function(username, message) {
