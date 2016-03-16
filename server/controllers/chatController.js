@@ -28,7 +28,11 @@ module.exports = function(io) {
 			// check if the username is available.  if not, stop here.  they will have to try again
 			if (users[username]) {
 				socket.emit('ERROR', 'That username is already taken.');
+        console.log(username + ': ' + users[username]);
 				return;
+			} else {
+				socket.emit('SUCCESS');
+				console.log(username + ' logged in.');
 			}
 
 			// init the user object and add them to the user map
