@@ -3,8 +3,12 @@ body {
     font-family: Helvetica;
 }
 
-p {
+p, h4 {
     margin: 0;
+}
+
+div {
+    word-wrap: break-word;
 }
 
 .messageTextInput {
