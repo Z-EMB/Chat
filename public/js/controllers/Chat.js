@@ -2,9 +2,9 @@ $(document).ready(function() {
     var socket = io();
     var $chatWindow = $('.chatWindow');
     var $chatInput = $('.messageTextInput');
+    var $uname = $('.login_username');
 
     //socket.emit('userConnect');
-    $chatInput.focus();
 
     $('.errorMsg').hide();
     var $loginBox = $('#LoginBoxContent');
@@ -23,6 +23,7 @@ $(document).ready(function() {
     $loginBox.css('top', windowHeight/2 - $loginBox.height() / 2);
     $loginBox.css('left', windowWidth/2 - $loginBox.width() / 2);
     $loginBox.fadeIn(2000);
+    $uname.focus();
 
     // once the button is clicked
     $('.loginButton').click(function () {
@@ -35,6 +36,7 @@ $(document).ready(function() {
         socket.on('SUCCESS', function() {
             $(mask).hide();
             $('.window').hide();
+            $chatInput.focus();
         });
     });
 
@@ -49,16 +51,23 @@ $(document).ready(function() {
     });
 
     socket.on('updateRooms', function(rooms) {
-        var lobbyWindow = $('.lobby');
-        lobbyWindow.empty();
+        var $lobbyWindow = $('.lobby');
+        $lobbyWindow.empty();
         Object.keys(rooms).forEach(function(roomname) {
-            lobbyWindow.append("<h4>"+roomname+"</h4>");
+            var $room = $(document.createElement('h4'));
+            $room.append(document.createTextNode(roomname));
+            $lobbyWindow.append($room);
+            $room.addClass('room');
             var userList = document.createElement('ul');
+            $room.click(function() {
+                console.log('Switch to ' + $room.text());
+                socket.emit('switchRoom', $room.text());
+            });
             var users = rooms[roomname];
             users.forEach(function(user) {
                 $(userList).append("<li>"+user+"</li>");
             });
-            lobbyWindow.append(userList);
+            $lobbyWindow.append(userList);
         });
     });
 

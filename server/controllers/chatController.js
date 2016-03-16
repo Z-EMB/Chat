@@ -61,6 +61,10 @@ module.exports = function(io) {
 
 		// Client emits 'switchRoom' ==> user switches chatrooms
 		socket.on('switchRoom', function(roomname) {
+			if (socket.roomname === roomname) {
+				return;
+			}
+
 			// remove the user from their old room
 			var oldRoom = rooms[socket.roomname];
 			var user = users[socket.username];

@@ -11,6 +11,10 @@ div {
     word-wrap: break-word;
 }
 
+.room {
+    cursor: pointer;
+}
+
 .messageTextInput {
     margin-top: 10px;
     padding: 10px;
