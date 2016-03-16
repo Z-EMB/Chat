@@ -1,44 +1,62 @@
-.messageTextInput{
+body {
+    background: radial-gradient(#162955, #061539);
+    font-family: Helvetica;
+}
+
+p, h4 {
+    margin: 0;
+}
+
+div {
+    word-wrap: break-word;
+}
+
+.messageTextInput {
+    margin-top: 10px;
     padding: 10px;
-    width: 60%;
-    height: 10%;
+    width: 65%;
     border: 1px solid black;
-    margin-right: 3%;
+    border-radius: 25px;
+    background-color: #7787AB;
 }
 
 .messageTextInput:focus {
-    background-color: #ccffec;
+    background-color: white;
 }
 
 .chatWindow {
+    background-color: white;
     padding: 10px;
+    margin-right: 20px;
     width: 75%;
     height: 75%;
     float: left;
     border: 1px solid black;
-    overflow-y: auto;
+    border-radius: 25px;
+    overflow-y: hidden;
 }
 
 .lobby {
+    background-color: white;
     padding: 10px;
-    width: 17%;
+    width: 20%;
     height: 75%;
-    float: right;
     border: 1px solid black;
     overflow-y: auto;
 }
 
 .sendButton {
+    background-color: #7787AB;
     padding: 10px;
     width: 10%;
-    height: 10%;
     border:0px solid black;
+    border-radius: 25px;
     font-size: 1em;
 }
 
 .sendButton:hover {
     font-size: 0.92em;
-    background-color: #07ffb2;
+    background-color: SlateGrey;
 }
 
 .sendButton:active {
@@ -47,9 +65,9 @@
 }
 
 .browserChatView{
-    padding:10px;
+    padding: 10px;
     height: 95vh;
-    border:1px solid black;
+    border: none;
 }
 
 #mask {
@@ -81,7 +99,7 @@
       bottom: 0px;
       width: 250px;
       left: 250px;
-    }
+}
 
 #loginBox #loginBoxContent {
       width: 750px;
@@ -90,7 +108,7 @@
       background-color: #ffffff;
       font-family: 'Segoe UI Light', sans-serif;
       font-size: 15pt;
-    }
+}
 
 @media only screen and (max-width : 480px) and (max-height: 800px) {
     .chatWindow {
