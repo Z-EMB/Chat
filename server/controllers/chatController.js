@@ -87,6 +87,7 @@ module.exports = function(io) {
 
 		// Client disconnects
 		socket.on('disconnect', function() {
+			rooms[socket.roomname].drop(socket.username);
 			// remove user from the user map
 			delete users[socket.username];
 

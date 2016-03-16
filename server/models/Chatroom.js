@@ -37,12 +37,16 @@ module.exports = function() {
 		user.join(this.name);
 	};
 
+	Chatroom.prototype.drop = function(username) {
+		delete this.users[username];
+	};
+
 	/**
 	 * Remove a user from the room.
 	 * @param {User} user
 	 */
 	Chatroom.prototype.remove = function(user) {
-		delete this.users[user.who()];
+		this.drop(user.who());
 		user.leave();
 	};
 
