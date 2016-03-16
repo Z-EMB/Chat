@@ -45,6 +45,10 @@ div {
     overflow-y: auto;
 }
 
+.loginButton {
+    width: 100px !important;
+}
+
 .sendButton {
     background-color: #7787AB;
     padding: 10px;
@@ -83,8 +87,8 @@ div {
       position: absolute;
       left: 0;
       top: 0;
-      width: 440px;
-      height: 200px;
+      width: 300px;
+      height: 100px;
       display: none;
       z-index: 9999;
       padding: 20px;
@@ -93,12 +97,8 @@ div {
       background-color: white;
 }
 
-#popupfoot {
-      font-size: 16pt;
-      position: absolute;
-      bottom: 0px;
-      width: 250px;
-      left: 250px;
+#loginBox p {
+    margin-bottom: 5px;
 }
 
 #loginBox #loginBoxContent {

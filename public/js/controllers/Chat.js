@@ -66,7 +66,7 @@ $(document).ready(function() {
         return $chatInput.val();
     }
 
-    $('.sendButton').click(function() {
+    $('.sendButton').not('.loginButton').click(function() {
         if (getMessageValue()) {
             socket.emit('sendMessage', getMessageValue());
             $chatInput.val("");
@@ -76,7 +76,19 @@ $(document).ready(function() {
 
     $chatInput.keyup(function(event) {
         if (event.keyCode == 13) {
-            $('.sendButton').click();
+            $('.sendButton').not('.loginButton').click();
+        }
+    });
+
+    $('.login_username').keyup(function(event) {
+        if (event.keyCode == 13) {
+            $('.loginButton').click();
+        }
+    });
+
+    $('.login_chatroom').keyup(function(event) {
+        if (event.keyCode == 13) {
+            $('.loginButton').click();
         }
     });
 });
