@@ -1,15 +1,21 @@
 $(document).ready(function() {
     var socket = io();
-//
+    var $chatWindow = $('.chatWindow');
+    var $chatInput = $('.messageTextInput');
+
     socket.emit('userConnect');
+    $chatInput.focus();
 
     socket.on('updateChat', function(username, message) {
-        $('.chatWindow').append("<p> username: " + username +
-            "Message: " + message + "</p>" );
-        console.log('I have received the update event');
+        var chatMessage = "<p><strong>" + username + ":</strong> " + message + "</p>";
+        if (username === 'EMF_HOST') {
+            chatMessage = '<h4>' + chatMessage + '</h4>';
+        }
+        $chatWindow.append(chatMessage);
+        $chatWindow[0].scrollTop = $chatWindow[0].scrollHeight;
     });
 
-    socket.on('updateRooms', function(rooms){
+    socket.on('updateRooms', function(rooms) {
         var lobbyWindow = $('.lobby');
         lobbyWindow.empty();
         Object.keys(rooms).forEach(function(roomname) {
@@ -21,23 +27,22 @@ $(document).ready(function() {
             });
             lobbyWindow.append(userList);
         });
-        lobbyWindow.scrollTop(lobbyWindow.height());
     });
 
-    function getMessageValue(){
-        return $('.messageTextInput').val();
+    function getMessageValue() {
+        return $chatInput.val();
     }
 
     $('.sendButton').click(function() {
-        if(getMessageValue()){
+        if (getMessageValue()) {
             socket.emit('sendMessage', getMessageValue());
-            $('.messageTextInput').val("");
+            $chatInput.val("");
         }
     });
 
 
-    $('.messageTextInput').keyup(function(event){
-        if(event.keyCode == 13){
+    $chatInput.keyup(function(event) {
+        if (event.keyCode == 13) {
             $('.sendButton').click();
         }
     });
