@@ -47,7 +47,7 @@ $(document).ready(function() {
             chatMessage = '<h4>' + chatMessage + '</h4>';
         }
         $chatWindow.append(chatMessage);
-        $chatWindow[0].scrollTop = $chatWindow[0].scrollHeight;
+        $chatWindow.scrollTop( $chatWindow.height());
     });
 
     socket.on('updateRooms', function(rooms) {
