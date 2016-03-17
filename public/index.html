@@ -12,7 +12,7 @@
                     <p>EMF Chat Login</p>
                     <p>Username: <input class="login_username" type="text"></p>
                     <p>Chat Room: <input class="login_chatroom" type="text" placeholder="default"></p>
-                    <p><button class="sendButton loginButton" type="submit">Login</button></p>
+                    <p><button class="loginButton" type="submit">Login</button></p>
                         <div class="errorMsg"> <p>Username Already Taken</p> </div> 
                 </div>
             </div> 
@@ -21,11 +21,11 @@
                 <div class="chatWindow"></div>
             </div>
             <div class="lobby"></div>
-            <input class="messageTextInput" type="text"/>
+            <input class="messageTextInput" type="text" placeholder="Message or share file"/>
             <button class="sendButton" type="submit">Send</button>
         </div>
     </body>
     <script src ="/socket.io/socket.io.js"></script>
-    <script src="js/lib/jquery-1.12.1.min.js"></script>
+    <script src="resources/lib/jquery-1.12.1.min.js"></script>
     <script src="js/controllers/Chat.js">  </script>
 </html>

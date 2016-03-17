@@ -71,13 +71,9 @@ $(document).ready(function() {
         });
     });
 
-    function getMessageValue() {
-        return $chatInput.val();
-    }
-
-    $('.sendButton').not('.loginButton').click(function() {
-        if (getMessageValue()) {
-            socket.emit('sendMessage', getMessageValue());
+    $('.sendButton').click(function() {
+        if ($chatInput.val()) {
+            socket.emit('sendMessage', $chatInput.val());
             $chatInput.val("");
         }
     });
@@ -85,7 +81,7 @@ $(document).ready(function() {
 
     $chatInput.keyup(function(event) {
         if (event.keyCode == 13) {
-            $('.sendButton').not('.loginButton').click();
+            $('.sendButton').click();
         }
     });
 
