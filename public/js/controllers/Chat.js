@@ -79,6 +79,11 @@ $(document).ready(function() {
         }
     });
 
+    $('.createRoom').click(function() {
+        if($('.roomName').val().length <= 10 && $('.roomName').val().length != 0){
+            socket.emit('switchRoom', $('.roomName').val());
+        }
+    });
 
     $chatInput.keyup(function(event) {
         if (event.keyCode == 13) {
