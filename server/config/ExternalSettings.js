@@ -11,6 +11,7 @@ function setUpPaths(){
     global.controllers = global.backend + '/controllers';
     global.views = global.backend + '/views';
     global.config = global.backend + '/config';
+    global.userFiles = 'public/files/';
 }
 
 function loadSettings(app){

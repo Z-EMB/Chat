@@ -3,6 +3,7 @@ $(document).ready(function() {
     var $chatWindow = $('.chatWindow');
     var $chatInput = $('.messageTextInput');
     var $uname = $('.login_username');
+    var dragEvents = 'drag dragstart dragend dragover dragenter dragleave drop';
 
     //socket.emit('userConnect');
 
@@ -94,6 +95,31 @@ $(document).ready(function() {
     $('.login_chatroom').keyup(function(event) {
         if (event.keyCode == 13) {
             $('.loginButton').click();
+        }
+    });
+
+    $('.browserChatView').on(dragEvents, function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    })
+    .on('dragover dragenter', function() {
+        // add dragover class
+    })
+    .on('dragleave dragend drop', function() {
+        // remove dragover class
+    })
+    .on('drop', function(e) {
+        // handle drop
+        file = e.originalEvent.dataTransfer.files[0];
+        if (file.size > 1048576) {
+            alert('Whoa dude, that\'s like... a really big file.  Try something under 1 meg.');
+        } else {
+            var stream = ss.createStream();
+            ss(socket).emit('file', stream, {
+                size: file.size,
+                name: file.name
+            });
+            ss.createBlobReadStream(file).pipe(stream);
         }
     });
 });

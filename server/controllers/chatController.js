@@ -3,6 +3,9 @@
  * @param {Service} io: socket.io service
  */
 module.exports = function(io) {
+	var ss = require('socket.io-stream');
+	var fs = require('fs');
+
 	var User = require(global.models + '/User.js')();		// User model
 	var Room = require(global.models + '/Chatroom.js')();	// Chatroom model
 
@@ -19,7 +22,6 @@ module.exports = function(io) {
 	}
 
 	io.sockets.on('connection', function(socket) {	// Client connection
-		
 		// Client emits 'userConnect' ==> a user connects to our application
 		socket.on('userConnect', function(_username, _roomname) {
 			// if a username is provided, use that.  otherwise they are AnonymousN
@@ -99,6 +101,18 @@ module.exports = function(io) {
 
 			// send notifications
 			io.sockets.emit('updateRooms', createRoomUpdateData(rooms));
+		});
+
+		// Client sends a file
+		ss(socket).on('file', function(stream, data) {
+			stream.pipe(fs.createWriteStream(global.userFiles + data.name));
+			var openTag = '<a href="/files/' + data.name + '" target="_blank">';
+			var closeTag = '</a>';
+			socket.emit(
+				'updateChat',
+				serverName,
+				(socket.username + ' added ' + openTag + data.name + closeTag)
+			);
 		});
 	});
 };
