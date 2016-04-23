@@ -87,14 +87,18 @@ module.exports = function(io) {
 
 		// Client disconnects
 		socket.on('disconnect', function() {
-			rooms[socket.roomname].drop(socket.username);
-			// remove user from the user map
-			delete users[socket.username];
+			if (socket.roomname) {
+				rooms[socket.roomname].drop(socket.username);
+				if (socket.username) {
+					// remove user from the user map
+					delete users[socket.username];
+					socket.broadcast.to(socket.roomname)
+						.emit('updateChat', serverName, (socket.username + ' has disconnected.'));
+				}
+			}
 
 			// send notifications
 			io.sockets.emit('updateRooms', createRoomUpdateData(rooms));
-			socket.broadcast.to(socket.roomname)
-				.emit('updateChat', serverName, (socket.username + ' has disconnected.'));
 		});
 	});
 };
