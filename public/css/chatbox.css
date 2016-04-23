@@ -20,7 +20,6 @@ div {
     padding: 10px;
     width: 65%;
     border: 1px solid black;
-    border-radius: 25px;
     background-color: #7787AB;
 }
 
@@ -30,22 +29,12 @@ div {
 
 .chatWindow {
     background-color: white;
-    width: 100%;
-    height: 100%;
-    padding-right: 10%;
-    overflow-y:scroll;
-}
-
-.charWindowParent {
-    background-color: white;
     padding: 10px;
-    margin-right: 20px;
     width: 75%;
     height: 75%;
     float: left;
     border: 1px solid black;
-    border-radius: 25px;
-    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .lobby {
@@ -55,6 +44,7 @@ div {
     height: 75%;
     border: 1px solid black;
     overflow-y: auto;
+    float: right;
 }
 
 .loginButton {
@@ -66,7 +56,6 @@ div {
     padding: 10px;
     width: 10%;
     border:0px solid black;
-    border-radius: 25px;
     font-size: 1em;
 }
 
@@ -81,8 +70,7 @@ div {
 }
 
 .browserChatView{
-    padding: 10px;
-    height: 90vh;
+    height: 100vh;
     border: none;
 }
 
@@ -122,34 +110,8 @@ div {
       font-size: 15pt;
 }
 
-.login_chatroom {
-
-}
-
-.login_username {
-    
-}
-
-@media only screen and (max-width : 480px) and (max-height: 800px) {
+@media screen and (max-width: 650px) {
     .chatWindow {
-        width: 65%;
-        height: 75%;
-    }
-    .sendButton {
-        padding: 10px;
-        width: 24%;
-        height: 14%;
-        font-size: 1em;
-        float: right;
-    }
-    .messageTextInput{
-        padding: 10px;
-        width: 65%;
-        height: 10%;
-        border: 1px solid black;
-        float: left;
-    }
-    .browserChatView{
-        height: 100vh;
+        width: 60%;
     }
 }
