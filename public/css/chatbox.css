@@ -83,7 +83,8 @@ div {
 }
 
 .browserChatView{
-    height: 100vh;
+    padding: 10px;
+    height: 90vh;
     border: none;
 }
 
