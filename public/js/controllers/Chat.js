@@ -36,15 +36,30 @@ $(document).ready(function() {
             $('.errorMsg').show();
         });
         socket.on('SUCCESS', function() {
-            userColors[username] = '#'+Math.random().toString(16).slice(9);
+            userColors[username] = genHexColor();
             $(mask).hide();
             $('.window').hide();
             $chatInput.focus();
         });
     });
 
+    function genHexColor(){
+        return '#'+Math.random().toString(16).slice(2,8);
+    }
+
+    function getUserColor(username){
+        var uc;
+        if(!userColors[username]){
+            userColors[username] = genHexColor();
+            uc = userColors[username];
+        }else{
+            uc = userColors[username];
+        }
+        return uc;
+    }
+
     socket.on('updateChat', function(username, message) {
-        var chatMessage = "<p><strong style=\"color:"+userColors[username]+"\">" + username + "</strong>:" + message + "</p>";
+        var chatMessage = "<p><strong style=\"color:"+getUserColor(username)+"\">" + username + "</strong>:" + message + "</p>";
         if (username === 'EMF_HOST') {
             chatMessage = '<h4>' + chatMessage + '</h4>';
         }
@@ -67,7 +82,7 @@ $(document).ready(function() {
             });
             var users = rooms[roomname];
             users.forEach(function(user) {
-                $(userList).append("<li style=\"color:"+userColors[user]+"\">"+user+"</li>");
+                $(userList).append("<li style=\"color:"+getUserColor(user)+"\">"+user+"</li>");
             });
             $lobbyWindow.append(userList);
         });
