@@ -16,11 +16,12 @@ var io = require('socket.io')(server);
 // chat functionality
 require(global.controllers + '/chatController.js')(io);
 
-var PORT = 5000;
+var PORT = 80;
+
 
 // routing and middleware
 require(global.controllers + '/mainController.js')(app, express);
 
-server.listen(PORT, function() {
+server.listen(PORT,"0.0.0.0",  function() {
     console.log('Chat listening on port ' + PORT);
 });
