@@ -59,7 +59,7 @@ $(document).ready(function() {
     }
 
     socket.on('updateChat', function(username, message) {
-        var chatMessage = "<p><strong style=\"color:"+getUserColor(username)+"\">" + username + "</strong>:" + message + "</p>";
+        var chatMessage = "<p><strong style=\"color:"+getUserColor(username)+"\">" + username + "</strong>: " + message + "</p>";
         if (username === 'EMF_HOST') {
             chatMessage = '<h4>' + chatMessage + '</h4>';
         }
