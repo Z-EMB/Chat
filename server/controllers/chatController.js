@@ -113,9 +113,9 @@ module.exports = function(io) {
 			var addedMsg = socket.username + ' added ' + aOpen + data.name + aClose;
 			var msg      = data.isImage ? imgTag : addedMsg;
 			stream.pipe(fs.createWriteStream(fileLoc));
-			setTimeout(function() {
+			stream.on('finish', function() {
 				socket.emit('updateChat', serverName, msg);
-			}, 250);
+			});
 		});
 	});
 };
