@@ -110,11 +110,11 @@ module.exports = function(io) {
 			var aOpen    = '<a href="' + fileLoc + '" target="_blank">';
 			var aClose   = '</a>';
 			var imgTag   = '<img src="' + pubLoc + '" title="' + data.name + '"></img>';
-			var addedMsg = socket.username + ' added ' + aOpen + data.name + aClose;
+			var addedMsg = ' added ' + aOpen + data.name + aClose;
 			var msg      = data.isImage ? imgTag : addedMsg;
 			stream.pipe(fs.createWriteStream(fileLoc));
 			stream.on('finish', function() {
-				socket.emit('updateChat', serverName, msg);
+				socket.emit('updateChat', socket.username, msg);
 			});
 		});
 	});
