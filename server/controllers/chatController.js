@@ -105,14 +105,17 @@ module.exports = function(io) {
 
 		// Client sends a file
 		ss(socket).on('file', function(stream, data) {
-			stream.pipe(fs.createWriteStream(global.userFiles + data.name));
-			var openTag = '<a href="/files/' + data.name + '" target="_blank">';
-			var closeTag = '</a>';
-			socket.emit(
-				'updateChat',
-				serverName,
-				(socket.username + ' added ' + openTag + data.name + closeTag)
-			);
+			var fileLoc  = global.userFiles + data.name;
+			var pubLoc   = fileLoc.replace("public", "");
+			var aOpen    = '<a href="' + fileLoc + '" target="_blank">';
+			var aClose   = '</a>';
+			var imgTag   = '<img src="' + pubLoc + '" alt="' + data.name + '"></img>';
+			var addedMsg = socket.username + ' added ' + aOpen + data.name + aClose;
+			var msg      = data.isImage ? imgTag : addedMsg;
+			stream.pipe(fs.createWriteStream(fileLoc));
+			setTimeout(function() {
+				socket.emit('updateChat', serverName, msg);
+			}, 250);
 		});
 	});
 };

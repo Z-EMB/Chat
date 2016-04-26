@@ -3,10 +3,9 @@ $(document).ready(function() {
     var $chatWindow = $('.chatWindow');
     var $chatInput = $('.messageTextInput');
     var $uname = $('.login_username');
+    var $container = $('.browserChatView');
     var dragEvents = 'drag dragstart dragend dragover dragenter dragleave drop';
     var userColors = {};
-
-    //socket.emit('userConnect');
 
     $('.errorMsg').hide();
     var $loginBox = $('#LoginBoxContent');
@@ -96,7 +95,7 @@ $(document).ready(function() {
     });
 
     $('.createRoom').click(function() {
-        if($('.roomName').val().length <= 10 && $('.roomName').val().length != 0){
+        if($('.roomName').val().length <= 10 && $('.roomName').val().length !== 0){
             socket.emit('switchRoom', $('.roomName').val());
         }
     });
@@ -119,15 +118,15 @@ $(document).ready(function() {
         }
     });
 
-    $('.browserChatView').on(dragEvents, function(e) {
+    $container.on(dragEvents, function(e) {
         e.preventDefault();
         e.stopPropagation();
     })
     .on('dragover dragenter', function() {
-        // add dragover class
+        $chatWindow.addClass('add');
     })
     .on('dragleave dragend drop', function() {
-        // remove dragover class
+        $chatWindow.removeClass('add');
     })
     .on('drop', function(e) {
         // handle drop
@@ -138,7 +137,8 @@ $(document).ready(function() {
             var stream = ss.createStream();
             ss(socket).emit('file', stream, {
                 size: file.size,
-                name: file.name
+                name: file.name,
+                isImage: file.type.includes('image')
             });
             ss.createBlobReadStream(file).pipe(stream);
         }

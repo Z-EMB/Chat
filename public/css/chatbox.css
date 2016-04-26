@@ -49,15 +49,36 @@ div {
 
 .roomName{
     background-color: white;
-    width: 18%;
+    width: 16%;
+    float: right;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    background-color: #7787AB;
+}
+
+.roomName:focus {
+    background-color: white;
+}
+
+.createRoom{
+    background-color: #7787AB;
+    padding: 10px;
+    width: 4%;
+    border:0px solid black;
+    font-size: 1em;
     float: right;
     margin-top: 10px;
 }
-.createRoom{
-    background-color: white;
-    float: right;
-    width: 3%;
-    margin-top: 10px;
+
+.createRoom:hover {
+    font-size: 0.92em;
+    background-color: SlateGrey;
+}
+
+.createRoom:active {
+    background-color: #11a474;
+    position:relative;
 }
 
 .loginButton {
@@ -111,10 +132,15 @@ div {
       background-color: white;
 }
 
-
-
 #loginBox p {
     margin-bottom: 5px;
+}
+
+.add {
+  border: 5px solid green;
+  background-image: url("/resources/addFile.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #loginBox #loginBoxContent {
