@@ -109,7 +109,7 @@ module.exports = function(io) {
 			var pubLoc   = fileLoc.replace("public", "");
 			var aOpen    = '<a href="' + fileLoc + '" target="_blank">';
 			var aClose   = '</a>';
-			var imgTag   = '<img src="' + pubLoc + '" alt="' + data.name + '"></img>';
+			var imgTag   = '<img src="' + pubLoc + '" title="' + data.name + '"></img>';
 			var addedMsg = socket.username + ' added ' + aOpen + data.name + aClose;
 			var msg      = data.isImage ? imgTag : addedMsg;
 			stream.pipe(fs.createWriteStream(fileLoc));
