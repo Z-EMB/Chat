@@ -4,10 +4,12 @@ $(document).ready(function() {
     var $chatInput = $('.messageTextInput');
     var $uname = $('.login_username');
     var $container = $('.browserChatView');
+    var $overlay = $('.addOverlay');
     var dragEvents = 'drag dragstart dragend dragover dragenter dragleave drop';
     var userColors = {};
 
     $('.errorMsg').hide();
+    $overlay.hide();
     var $loginBox = $('#LoginBoxContent');
 
     // set the width and height of the mask to cover the whole screen 
@@ -118,15 +120,24 @@ $(document).ready(function() {
         }
     });
 
+    var dragged = false;
     $container.on(dragEvents, function(e) {
         e.preventDefault();
         e.stopPropagation();
     })
     .on('dragover dragenter', function() {
-        $chatWindow.addClass('add');
+	if (!dragged) {
+            $chatWindow.addClass('addWindow');
+            $overlay.show();
+            setTimeout(function() { dragged = true; }, 0);
+        }
     })
     .on('dragleave dragend drop', function() {
-        $chatWindow.removeClass('add');
+        if (dragged) {
+            $chatWindow.removeClass('addWindow');
+            $overlay.hide();
+            setTimeout(function() { dragged = false; }, 0);
+        }
     })
     .on('drop', function(e) {
         // handle drop

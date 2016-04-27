@@ -136,8 +136,25 @@ div {
     margin-bottom: 5px;
 }
 
-.add {
+.Xadd {
   border: 5px solid green;
+  background-image: url("/resources/addFile.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.addWindow {
+  border: 5px solid green;
+  position: relative;
+}
+
+.addOverlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
   background-image: url("/resources/addFile.png");
   background-repeat: no-repeat;
   background-position: center;
