@@ -107,14 +107,14 @@ module.exports = function(io) {
 		ss(socket).on('file', function(stream, data) {
 			var fileLoc  = global.userFiles + data.name;
 			var pubLoc   = fileLoc.replace("public", "");
-			var aOpen    = '<a href="' + fileLoc + '" target="_blank">';
+			var aOpen    = '<a href="' + pubLoc + '" target="_blank">';
 			var aClose   = '</a>';
 			var imgTag   = '<img src="' + pubLoc + '" title="' + data.name + '"></img>';
 			var addedMsg = ' added ' + aOpen + data.name + aClose;
 			var msg      = data.isImage ? imgTag : addedMsg;
 			stream.pipe(fs.createWriteStream(fileLoc));
 			stream.on('finish', function() {
-				socket.emit('updateChat', socket.username, msg);
+				io.sockets.in(socket.roomname).emit('updateChat', socket.username, msg);
 			});
 		});
 	});
